@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+
+import { CardList } from './components/card-list/card-list.component';
+
 //import logo from './logo.svg';
 import './App.css';
+
+
 
 
 
@@ -30,42 +35,29 @@ export default class App extends Component {
     super();
 
     this.state = {
-      guys: [
-        {
-          id: 'p1',
-          firstName: 'Person',
-          secondName: '1'
-        },
-        {
-          id: 'p2',
-          firstName: 'Person',
-          secondName: '2'
-        },
-        {
-          id: 'p3',
-          firstName: 'Person',
-          secondName: '3'
-        }
-      ]
+      test: ['NO TEXT HERE', 'qwerty'],
+      guys: []
     }
+  }
+
+  testFunction = () => {
+
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then(resp => resp.json())
+        .then(users => this.setState({guys: users}))
   }
 
   render() {
 
     return (
         <div className="App">
-          {/*<header className="App-header">*/}
-          {/*  <img src='https://picsum.photos/500/500' className="App-logo" alt="logo" />*/}
-          {/*  <h1>TEST!</h1>*/}
-          {/*  <p>*/}
-          {/*    Edit <code>src/App.js</code> and save to reload.*/}
-          {/*  </p>*/}
-          {/*  <br/>*/}
-          {/*  <p>{ this.state.string }</p>*/}
-          {/*  <button onClick={() => this.setState({string: 'Bingo!!!'})}>Push me please</button>*/}
-          {/*</header>*/}
-
-          {this.state.guys.map(guy => (<h1 key={ guy.id }>{ guy.id } - { guy.firstName } - { guy.secondName }</h1>))}
+          <br/>
+            <CardList guys={this.state.guys}>
+            </CardList>
+          <br/>
         </div>
     );
   }
